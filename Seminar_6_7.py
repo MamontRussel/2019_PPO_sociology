@@ -347,7 +347,8 @@ print(new_dictionary)
 '''
 
 file = open('romeo.txt', 'r', encoding='utf8')  # загружаем файл в память
-lines = file.readlines()  # создаем объект, который при каждом обращении будет загружать новую строку в память
+lines = file.readlines()  # считываем строки из файла в память
+file.close() # мы уже сохранили информацию из файла, можем закрыть его
 
 for line in lines:
     print(line)
@@ -357,8 +358,6 @@ for line in lines:
 Давайте посчитаем, какие слова и как часто встрачаются в нашем файле. 
 Создадим словарь, в котором ключом будет слово, а значением - количество раз, которое оно встречается.
 '''
-file = open('romeo.txt', 'r', encoding='utf8')  # загружаем файл в память
-lines = file.readlines()  # перезаписываем объект lines, потому что выше итератор дошел до конца и закончился
 words = dict()  # создаем пустой словарь
 for line in lines:  # итерируемся по строкам файла
     templst = list(map(lambda x: x.lower(), line.split()))  # cохраняем все слова из строки в список в нижнем регистре
@@ -412,6 +411,7 @@ for line in handle:
         else:
             emails[email] += 1  # если да, то обновляем значение на 1
 print(emails)
+handle.close() # закрываем файл, когда закончили работать с ним
 
 dict_max_value(emails)  # воспользуемся нашей функцией, чтобы найти максимальное значение
 
@@ -437,6 +437,7 @@ for line in fhand:
         total = total + y  # обновляем total
 average = total/count  # находим среднее
 print('Average spam confidence: ', round(average, 2))
+fhand.close()
 
 
 
